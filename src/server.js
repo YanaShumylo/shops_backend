@@ -9,7 +9,7 @@ import router from './routers/index.js';
 
 dotenv.config();
 
-const PORT = Number(getEnvVar('PORT', '3000'));
+const PORT = Number(process.env.PORT || getEnvVar('PORT', '3000'));
 
 export const startServer = () => {
 
