@@ -1,7 +1,10 @@
 import { getAllShops, getShopById } from '../services/shops.js';
 
 export const getAllShopsController = async (req, res) => {
-  const shops = await getAllShops();
+
+  const { minRating, maxRating } = req.query;
+
+  const shops = await getAllShops({ minRating,maxRating,});
   res.json({
     status: 200,
     message: 'Successfully found shops!',

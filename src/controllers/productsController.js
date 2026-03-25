@@ -1,14 +1,17 @@
-import { getProductById } from '../services/products.js';
-import { ProductsCollection } from '../db/models/product.js';
+import { getAllProducts, getProductById } from '../services/products.js';
 
 export const getAllProductsController = async (req, res) => {
   const { shopId } = req.params;
-  const products = await ProductsCollection.find({ shop: shopId });
+  const { category, sortBy, order } = req.query;
+  const categories = category ? category.split(',') : [];
+  const products = await getAllProducts({ shopId, categories, sortBy, order, });
+
   res.json({
     status: 200,
     message: 'Successfully found products!',
-    data: products,
-  });
+      data: products,
+  }
+  );
 };
 
 export const getProductByIdController = async (req, res) => {
